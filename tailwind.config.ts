@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'cloud-bg': "url('/images/background.svg')",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
