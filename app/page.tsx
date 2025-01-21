@@ -25,6 +25,39 @@ export default function Home() {
     visible: { opacity: 1, y: 0 },
   };
 
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 100 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const pages = [
+    {
+      title: "À propos",
+      description: "Découvrez mon parcours et mes motivations.",
+      link: "/about",
+      button: "En savoir plus",
+    },
+    {
+      title: "Projets",
+      description: "Explorez mes projets personnels et professionnels.",
+      link: "/projects",
+      button: "Voir les projets",
+    },
+    {
+      title: "Compétences",
+      description: "Un aperçu de mes compétences techniques.",
+      link: "/skills",
+      button: "Découvrir mes compétences",
+    },
+    {
+      title: "Contact",
+      description: "Entrez en contact avec moi pour toute opportunité.",
+      link: "/contact",
+      button: "Me contacter",
+    },
+  ];
+
+
   return (
 
     <main className="relative">
@@ -33,6 +66,7 @@ export default function Home() {
         <Cursor
           cursorInnerColor="#301467"
           cursorSize={25}
+          isGelly 
         />
       </>
 
@@ -117,6 +151,59 @@ export default function Home() {
           </p>
         </motion.div>
       </section>
+
+      {/* Menu horizontal */}
+      <section className="py-10 h-[100vh] flex flex-col">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{
+            once: false, // L'animation peut rejouer si on scroll
+            amount: 0.5, // L'animation se déclenche quand 50% de la section est visible
+          }}
+          variants={{
+            hidden: { opacity: 0, y: 100 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 1, // Temps légèrement prolongé pour plus de fluidité
+                ease: "linear", // Courbe naturelle pour un mouvement doux
+                staggerChildren: 0.125, // Décalage progressif entre les enfants
+              },
+            },
+          }}
+          className="flex justify-center items-center space-x-8 max-w-7xl mx-auto h-full"
+        >
+          {pages.map((page, index) => (
+            <motion.div
+              key={index}
+              variants={{
+                hidden: { opacity: 0, y: 100 }, // État initial
+                visible: {
+                  opacity: 1,
+                  y: 0, // Position finale
+                  transition: {
+                    duration: 1, // Animation uniforme
+                    ease: "linear", // Courbe naturelle
+                  },
+                },
+              }}
+              className="bg-white p-6 rounded-lg shadow-lg hover:scale-105 transition-transform"
+            >
+              <h3 className="text-lg font-bold text-purple-700">{page.title}</h3>
+              <p className="text-sm text-gray-600 mt-2">{page.description}</p>
+              <a
+                href={page.link}
+                className="inline-block mt-4 px-4 py-2 bg-purple-600 text-white rounded-md text-sm font-medium hover:bg-purple-700"
+              >
+                {page.button}
+              </a>
+            </motion.div>
+          ))}
+        </motion.div>
+      </section>
+
     </main>
   );
 }
