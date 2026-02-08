@@ -25,10 +25,13 @@ export default function Home() {
     visible: { opacity: 1, y: 0 },
   };
 
+  /*
   const cardVariants: Variants = {
     hidden: { opacity: 0, y: 100 },
     visible: { opacity: 1, y: 0 },
   };
+
+  */
 
   const pages = [
     {
@@ -142,9 +145,9 @@ export default function Home() {
           <h2 className="text-3xl font-semibold text-black">Qui suis-je ?</h2>
           <p className="mt-4 text-lg text-gray text-center max-w-lg">
             Je suis <strong>ingénieur en informatique</strong>, diplômé de
-            l'<strong>INSA Hauts-de-France</strong>. Passionné par le développement
-            d'interfaces modernes et élégantes, je suis actuellement en
-            <strong> recherche d'opportunités professionnelles</strong> dans la
+            l&apos;<strong>INSA Hauts-de-France</strong>. Passionné par le développement
+            d&apos;interfaces modernes et élégantes, je suis actuellement en
+            <strong> recherche d&apos;opportunités professionnelles</strong> dans la
             région de <strong>Lille</strong>. Mon objectif est de contribuer à des
             projets innovants, mettant en avant mes compétences en développement
             front-end et en résolution de problèmes.
