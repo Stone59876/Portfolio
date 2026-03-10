@@ -3,6 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import { Cursor } from 'react-creative-cursor';
 import 'react-creative-cursor/dist/styles.css';
+import Link from 'next/link';
 
 export default function Home() {
 
@@ -39,25 +40,37 @@ export default function Home() {
       description: "Découvrez mon parcours et mes motivations.",
       link: "/about",
       button: "En savoir plus",
+      external: false,
     },
     {
       title: "Projets",
       description: "Explorez mes projets personnels et professionnels.",
       link: "/projects",
       button: "Voir les projets",
+      external: false,
     },
     {
       title: "Compétences",
       description: "Un aperçu de mes compétences techniques.",
       link: "/skills",
       button: "Découvrir mes compétences",
+      external: false,
+
     },
     {
       title: "Contact",
       description: "Entrez en contact avec moi pour toute opportunité.",
       link: "/contact",
       button: "Me contacter",
+      external: false,
     },
+    {
+      title: "CV",
+      description: "Téléchargez mon CV au format PDF.",
+      link: "/resume/RESUME-CV-COGO-CLEMENT-FR.pdf",
+      button: "Télécharger mon CV",
+      external: true,
+    }
   ];
 
 
@@ -69,7 +82,7 @@ export default function Home() {
         <Cursor
           cursorInnerColor="#301467"
           cursorSize={25}
-          isGelly 
+          isGelly
         />
       </>
 
@@ -142,8 +155,8 @@ export default function Home() {
           transition={{ duration: 1, delay: 0.5 }}
           variants={sectionVariants}
         >
-          <h2 className="text-3xl font-semibold text-black">Qui suis-je ?</h2>
-          <p className="mt-4 text-lg text-gray text-center max-w-lg">
+          <h2 className="text-3xl font-semibold text-purple-700">Qui suis-je ?</h2>
+          <p className="mt-4 text-lg !text-purple-600 text-center max-w-lg">
             Je suis <strong>ingénieur en informatique</strong>, diplômé de
             l&apos;<strong>INSA Hauts-de-France</strong>. Passionné par le développement
             d&apos;interfaces modernes et élégantes, je suis actuellement en
@@ -156,7 +169,7 @@ export default function Home() {
       </section>
 
       {/* Menu horizontal */}
-      <section className="py-10 h-[100vh] flex flex-col">
+      <section className="py-16 min-h-screen flex items-center">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -176,32 +189,45 @@ export default function Home() {
               },
             },
           }}
-          className="flex justify-center items-center space-x-8 max-w-7xl mx-auto h-full"
+          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-6 max-w-7xl mx-auto w-full px-4"
         >
           {pages.map((page, index) => (
             <motion.div
               key={index}
               variants={{
-                hidden: { opacity: 0, y: 100 }, // État initial
+                hidden: { opacity: 0, y: 100 },
                 visible: {
                   opacity: 1,
-                  y: 0, // Position finale
+                  y: 0,
                   transition: {
-                    duration: 1, // Animation uniforme
-                    ease: "linear", // Courbe naturelle
+                    duration: 1,
+                    ease: "linear",
                   },
                 },
               }}
-              className="bg-white p-6 rounded-lg shadow-lg hover:scale-105 transition-transform"
+              className="bg-white p-6 rounded-lg shadow-lg hover:scale-105 transition-transform flex flex-col items-center text-center"
             >
               <h3 className="text-lg font-bold text-purple-700">{page.title}</h3>
-              <p className="text-sm text-gray-600 mt-2">{page.description}</p>
-              <a
-                href={page.link}
-                className="inline-block mt-4 px-4 py-2 bg-purple-600 text-white rounded-md text-sm font-medium hover:bg-purple-700"
-              >
-                {page.button}
-              </a>
+              <p className="text-sm text-gray-600 mt-2 max-w-xs">{page.description}</p>
+
+              {page.external ? (
+                <a
+                  href={page.link}
+                  download  
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block mt-4 px-4 py-2 bg-purple-600 text-white rounded-md text-sm font-medium hover:bg-purple-700"
+                >
+                  {page.button}
+                </a>
+              ) : (
+                <Link
+                  href={page.link}
+                  className="inline-block mt-4 px-4 py-2 bg-purple-600 text-white rounded-md text-sm font-medium hover:bg-purple-700"
+                >
+                  {page.button}
+                </Link>
+              )}
             </motion.div>
           ))}
         </motion.div>
